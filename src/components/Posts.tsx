@@ -1,27 +1,27 @@
 import { use } from "react";
 
 // Promise-based data fetching.
-const usersPromise = fetch("https://jsonplaceholder.typicode.com/users").then(
+const postsPromise = fetch("https://jsonplaceholder.typicode.com/users").then(
   (response) => response.json(),
 );
 
 // Async function-based data fetching.
-const getUsers = async () => {
+const getPosts = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/users");
   return response.json();
 };
 // Promise created by calling the async function.
-const usersAsyncPromise = getUsers();
+const postsAsyncPromise = getPosts();
 
-const Users = () => {
-  // const users = use(usersPromise);
-  const users = use(usersAsyncPromise);
+const Posts = () => {
+  // const posts = use(postsPromise);
+  const posts = use(postsAsyncPromise);
 
   return (
     <div>
-      <h1>users: {users.length}</h1>
+      <h1 className="text-center">Posts ({posts.length})</h1>
     </div>
   );
 };
 
-export default Users;
+export default Posts;
