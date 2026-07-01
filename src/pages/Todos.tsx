@@ -1,7 +1,6 @@
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 const Todos = () => {
   const todos = useLoaderData();
-  console.log("Todos:", todos);
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4 text-center">
@@ -9,7 +8,11 @@ const Todos = () => {
       </h1>
       <ol className="list-decimal ms-6">
         {todos.map((todo: any) => (
-          <li key={todo.id}>{todo.title}</li>
+          <li key={todo.id}>
+            <Link to={`/todos/${todo.id}`} className="hover:underline">
+              {todo.title}
+            </Link>
+          </li>
         ))}
       </ol>
     </div>

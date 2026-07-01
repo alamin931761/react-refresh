@@ -8,6 +8,7 @@ import Root from "./layouts/Root.tsx";
 import Home from "./pages/Home.tsx";
 import About from "./pages/About.tsx";
 import Todos from "./pages/Todos.tsx";
+import TodoDetails from "./pages/TodoDetails.tsx";
 
 const router = createBrowserRouter([
   {
@@ -29,8 +30,27 @@ const router = createBrowserRouter([
       },
       {
         path: "todos",
-        Component: Todos,
-        loader: () => fetch("https://jsonplaceholder.typicode.com/todos"),
+        children: [
+          {
+            index: true,
+            Component: Todos,
+            loader: () => fetch("https://jsonplaceholder.typicode.com/todos"),
+          },
+          {
+            path: ":id",
+            loader: ({ params }) =>
+              fetch(`https://jsonplaceholder.typicode.com/todos/${params.id}`),
+            Component: TodoDetails,
+          },
+        ],
+      },
+      // {
+      //   path: "todos/:id",
+      //   Component: TodoDetails,
+      // },
+      {
+        path: "*",
+        element: <h1>404 Not Found</h1>,
       },
     ],
   },
