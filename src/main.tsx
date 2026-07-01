@@ -30,6 +30,7 @@ const router = createBrowserRouter([
       {
         path: "todos",
         Component: Todos,
+        loader: () => fetch("https://jsonplaceholder.typicode.com/todos"),
       },
     ],
   },
